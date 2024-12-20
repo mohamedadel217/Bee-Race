@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.domain.models.Bee
 import com.example.feature.R
-import com.example.feature.ui.RaceScreenState
+import com.example.feature.models.RaceScreenState
 import com.example.feature.ui.RaceViewModel
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.getViewModel
@@ -145,7 +145,7 @@ fun RaceContent(countdownTimer: Int, bees: List<Bee>) {
                     showMedal = index < 3
                 )
                 if (index != bees.size - 1) {
-                    Divider() // Line separator
+                    Divider()
                 }
             }
         }
@@ -160,7 +160,6 @@ fun BeeRow(rank: Int, bee: Bee, showMedal: Boolean) {
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Bee Icon with Circle Background
         Box(
             modifier = Modifier
                 .size(40.dp)
@@ -188,9 +187,9 @@ fun BeeRow(rank: Int, bee: Bee, showMedal: Boolean) {
             Image(
                 painter = painterResource(
                     id = when (rank) {
-                        1 -> R.drawable.gold_medal // Replace with gold medal asset
-                        2 -> R.drawable.silver_medal // Replace with silver medal asset
-                        3 -> R.drawable.bronze_medal // Replace with bronze medal asset
+                        1 -> R.drawable.gold_medal
+                        2 -> R.drawable.silver_medal
+                        3 -> R.drawable.bronze_medal
                         else -> 0
                     }
                 ),

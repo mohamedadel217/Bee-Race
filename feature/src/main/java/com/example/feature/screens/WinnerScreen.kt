@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import android.graphics.Color as AndroidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.feature.R
@@ -39,7 +38,6 @@ fun WinnerScreen(winnerName: String, winnerColor: String, onRestart: () -> Unit)
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Winner Text
         Text(
             text = "Winner",
             style = MaterialTheme.typography.h4,
@@ -47,7 +45,7 @@ fun WinnerScreen(winnerName: String, winnerColor: String, onRestart: () -> Unit)
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Winner Icon with Circle Background
+
         Box(
             modifier = Modifier
                 .size(100.dp)
@@ -55,7 +53,7 @@ fun WinnerScreen(winnerName: String, winnerColor: String, onRestart: () -> Unit)
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.bee_icon), // Replace with your bee icon asset
+                painter = painterResource(id = R.drawable.bee_icon),
                 contentDescription = "Winner Icon",
                 modifier = Modifier.size(60.dp)
             )
@@ -63,7 +61,6 @@ fun WinnerScreen(winnerName: String, winnerColor: String, onRestart: () -> Unit)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Winner Rank and Name
         Text(
             text = "1st",
             style = MaterialTheme.typography.h5,
@@ -78,7 +75,7 @@ fun WinnerScreen(winnerName: String, winnerColor: String, onRestart: () -> Unit)
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Restart Button
+
         Button(
             onClick = onRestart,
             modifier = Modifier

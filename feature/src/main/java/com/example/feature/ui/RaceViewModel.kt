@@ -3,10 +3,9 @@ package com.example.feature.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
-import com.example.domain.models.Bee
 import com.example.domain.usecases.FetchBeeListUseCase
 import com.example.domain.usecases.FetchRaceDurationUseCase
-import com.example.feature.models.RaceState
+import com.example.feature.models.RaceScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -47,10 +46,4 @@ class RaceViewModel(
             }
         }
     }
-}
-
-sealed class RaceScreenState {
-    object Loading : RaceScreenState()
-    data class Data(val duration: Int, val bees: List<Bee>) : RaceScreenState()
-    data class Error(val message: String?, val captchaUrl: String?) : RaceScreenState()
 }

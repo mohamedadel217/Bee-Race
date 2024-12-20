@@ -18,11 +18,11 @@ import androidx.navigation.compose.rememberNavController
 fun RetryScreen(navController: NavController) {
     Scaffold(
         topBar = { TopAppBar(title = { Text("Retry") }) },
-        content = { contentPadding -> // Use contentPadding provided by Scaffold
+        content = { contentPadding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(contentPadding), // Apply padding to the Box
+                    .padding(contentPadding),
                 contentAlignment = Alignment.Center
             ) {
                 Button(onClick = { navController.navigate("race_screen") }) {

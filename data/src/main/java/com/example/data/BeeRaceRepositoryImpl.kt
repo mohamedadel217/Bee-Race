@@ -15,7 +15,7 @@ class BeeRaceRepositoryImpl(
 ) : BeeRaceRepository {
 
     override fun fetchBeeList(): Flow<Resource<List<Bee>>> = flow {
-        emit(Resource.Loading) // Emit loading state
+        emit(Resource.Loading)
         try {
             val response = api.getRaceStatus()
             if (response.isSuccessful) {

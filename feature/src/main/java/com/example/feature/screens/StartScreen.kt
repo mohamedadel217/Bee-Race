@@ -22,7 +22,7 @@ fun StartScreen(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues), // Apply content padding
+                    .padding(paddingValues),
                 contentAlignment = Alignment.Center
             ) {
                 Button(onClick = { navController.navigate("race_screen") }) {
