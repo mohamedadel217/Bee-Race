@@ -7,6 +7,7 @@ import com.example.data.BeeRaceRepositoryImpl
 import com.example.domain.BeeRaceRepository
 import com.example.domain.usecases.FetchBeeListUseCase
 import com.example.domain.usecases.FetchRaceDurationUseCase
+import com.example.feature.ui.RaceViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -25,6 +26,7 @@ object AppModule {
         single<BeeRaceRepository> { BeeRaceRepositoryImpl(get(), get()) }
         factory { FetchRaceDurationUseCase(get()) }
         factory { FetchBeeListUseCase(get()) }
+        viewModel { RaceViewModel(get(), get()) }
 
     }
 }

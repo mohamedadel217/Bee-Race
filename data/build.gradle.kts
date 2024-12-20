@@ -38,6 +38,7 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
+    implementation(libs.gson)
     implementation(libs.okhttp.logging)
     implementation(libs.coroutines.android)
     implementation(libs.androidx.core.ktx)

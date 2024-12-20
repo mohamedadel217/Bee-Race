@@ -35,7 +35,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
 }
 
@@ -46,10 +46,18 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(libs.coil)
     implementation(libs.koin.compose)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.tooling)
+    implementation(libs.compose.tooling.preview)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.runtime)
     implementation(libs.coroutines.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -16,7 +16,6 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
-import kotlin.test.assertFailsWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BeeRaceRepositoryImplTest {
@@ -45,17 +44,31 @@ class BeeRaceRepositoryImplTest {
     }
 
     @Test
-    fun `fetchRaceDuration throws exception on failure`() = runTest(dispatcherProvider.io) {
-        // Mock API failure
+    fun `fetchRaceDuration returns 0 on error`() = runTest(dispatcherProvider.io) {
+        // Mock API error
         coEvery { api.getRaceDuration() } returns Response.error(
             500,
-            "Internal Server Error".toResponseBody()
+            "Internal Server Error".toResponseBody("text/plain".toMediaType())
         )
 
-        // Execute repository method and verify exception
-        assertFailsWith<Exception> {
-            repository.fetchRaceDuration().toList()
-        }
+        // Execute repository method
+        val result = repository.fetchRaceDuration().toList()
+
+        // Verify results
+        assertEquals(listOf(0), result) // Verify fallback to 0
+        coVerify(exactly = 1) { api.getRaceDuration() }
+    }
+
+    @Test
+    fun `fetchRaceDuration returns 0 on exception`() = runTest(dispatcherProvider.io) {
+        // Mock exception
+        coEvery { api.getRaceDuration() } throws Exception("Network error")
+
+        // Execute repository method
+        val result = repository.fetchRaceDuration().toList()
+
+        // Verify results
+        assertEquals(listOf(0), result) // Verify fallback to 0
         coVerify(exactly = 1) { api.getRaceDuration() }
     }
 
@@ -70,32 +83,32 @@ class BeeRaceRepositoryImplTest {
         val result = repository.fetchBeeList().toList()
 
         // Verify results
-        assertEquals(1, result.size)
-        assert(result.first() is Resource.Success)
-        val beeList = (result.first() as Resource.Success).data
+        assertEquals(2, result.size) // Loading + Success
+        assert(result.first() is Resource.Loading)
+        assert(result[1] is Resource.Success)
+        val beeList = (result[1] as Resource.Success).data
         assertEquals(2, beeList.size)
         assertEquals("Bee1", beeList[0].name)
         coVerify(exactly = 1) { api.getRaceStatus() }
     }
 
     @Test
-    fun `fetchBeeList returns error resource on 403`() = runTest(dispatcherProvider.io) {
-        // Mock API response for captcha required
-        val captchaUrl = "https://captcha.com"
-        val errorBody =
-            """{"captchaUrl":"$captchaUrl"}""".toResponseBody("application/json".toMediaType())
-
-        coEvery { api.getRaceStatus() } returns Response.error(403, errorBody)
+    fun `fetchBeeList returns generic error on other errors`() = runTest(dispatcherProvider.io) {
+        // Mock API error
+        coEvery { api.getRaceStatus() } returns Response.error(
+            500,
+            "Internal Server Error".toResponseBody("text/plain".toMediaType())
+        )
 
         // Execute repository method
         val result = repository.fetchBeeList().toList()
 
         // Verify results
-        assertEquals(1, result.size)
-        assert(result.first() is Resource.Error)
-        val error = result.first() as Resource.Error
-        assertEquals("Captcha required", error.message)
-        assertEquals(captchaUrl, error.captchaUrl)
+        assertEquals(2, result.size) // Loading + Error
+        assert(result.first() is Resource.Loading)
+        assert(result[1] is Resource.Error)
+        val error = result[1] as Resource.Error
+        assertEquals("Error: 500", error.message)
         coVerify(exactly = 1) { api.getRaceStatus() }
     }
 }
