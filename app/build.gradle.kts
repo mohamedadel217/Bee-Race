@@ -49,6 +49,8 @@ dependencies {
     implementation(project(":common"))
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.moshi)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

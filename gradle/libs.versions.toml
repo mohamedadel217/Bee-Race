@@ -33,6 +33,10 @@ compose-navigation = { module = "androidx.navigation:navigation-compose", versio
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+mockk = { module = "io.mockk:mockk", version = "1.13.5" }
+mockk-android = { module = "io.mockk:mockk-android", version = "1.13.5" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version = "1.9.0" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.7.0" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
