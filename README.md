@@ -61,7 +61,9 @@ The app follows MVVM (Model-View-ViewModel) architecture with clean code princip
 git clone https://github.com/yourusername/bee-race-app.git
 
 2- Open the project in Android Studio.
+
 3- Sync Gradle and ensure all dependencies are installed.
+
 4- Run the application on an emulator or physical device.
 
 🧪 Testing
@@ -71,11 +73,3 @@ git clone https://github.com/yourusername/bee-race-app.git
   - Repository and Use Case tests for business logic validation.
   - View model
 
-- UI Tests:
-- Compose UI tests for screens:
-  - StartScreen
-  - RaceScreen
-  - WinnerScreen
-  - ErrorScreen
-  - RecaptchaScreen
-  
