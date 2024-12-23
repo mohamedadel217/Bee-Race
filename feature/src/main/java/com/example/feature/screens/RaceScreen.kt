@@ -46,9 +46,9 @@ fun RaceScreen(
     navController: NavController
 ) {
     val raceScreenState by viewModel.raceScreenState.collectAsState()
-    val countdownTimer = remember { mutableStateOf(0) } // Timer state
+    val countdownTimer = remember { mutableStateOf(0) }
 
-    // Update countdown when raceScreenState emits data
+
     LaunchedEffect(raceScreenState) {
         if (raceScreenState is RaceScreenState.Data) {
             val state = raceScreenState as RaceScreenState.Data
@@ -56,10 +56,10 @@ fun RaceScreen(
         }
     }
 
-    // Countdown timer logic
+
     LaunchedEffect(countdownTimer.value) {
         if (countdownTimer.value > 0) {
-            delay(1000L) // Delay for 1 second
+            delay(1000L)
             countdownTimer.value -= 1
         } else if (countdownTimer.value == 0 && raceScreenState is RaceScreenState.Data) {
             val state = raceScreenState as RaceScreenState.Data
@@ -104,12 +104,12 @@ fun RaceScreen(
                         if (state.captchaUrl != null) {
                             RecaptchaScreen(
                                 captchaUrl = state.captchaUrl,
-                                onCaptchaSolved = { navController.popBackStack() } // Navigate back after solving captcha
+                                onCaptchaSolved = { navController.popBackStack() }
                             )
                         } else {
                             ErrorScreen(
                                 errorMessage = state.message ?: "Unknown error",
-                                onRetry = { viewModel.observeRaceData() } // Retry fetching race data
+                                onRetry = { viewModel.observeRaceData() }
                             )
                         }
                     }
@@ -170,7 +170,7 @@ fun BeeRow(rank: Int, bee: Bee, showMedal: Boolean) {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.bee_icon), // Replace with your asset
+                painter = painterResource(id = R.drawable.bee_icon),
                 contentDescription = "Bee Icon"
             )
         }
@@ -182,7 +182,7 @@ fun BeeRow(rank: Int, bee: Bee, showMedal: Boolean) {
             Text(text = "${rank.ordinalRank()} ${bee.name}", style = MaterialTheme.typography.body1)
         }
 
-        // Medal (Only for Top 3 Bees)
+
         if (showMedal) {
             Image(
                 painter = painterResource(
